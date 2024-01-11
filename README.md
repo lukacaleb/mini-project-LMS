@@ -1,3 +1,4 @@
+USING TERRAFORM TO CREATE MULTIPLE INFRASTRUCTURE ON AWS.
 Using Terraform, to create several EC2 instances and put them behind an Elastic Load Balancer.
 Making sure that after applying your plan, Terraform exports the public IP 
 addresses of the instances to a file called host-inventory.
