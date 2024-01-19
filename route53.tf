@@ -1,5 +1,5 @@
 variable "domain_name" {
-    default = "www.manifestation.netfy.blog"
+    default = "http://manifestationcloudservice.com.ng/"
     type = string
     description = "Domain name"
 }

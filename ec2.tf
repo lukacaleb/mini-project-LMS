@@ -71,3 +71,16 @@ resource "local_file" "Ip_address" {
     ${aws_instance.ass-3.public_ip}
      EOT
 }
+
+
+##### METHOD 1 ######
+# Output the public IP addresses of the instances to a file
+output "instance_ips" {
+  value = aws_instance.my_servers.*.public_ip
+}
+
+# Write the output to a file called host-inventory
+resource "local_file" "host_inventory" {
+  content  = join("\n", aws_instance.my_servers.*.public_ip)
+  filename = "host-inventory"
+}

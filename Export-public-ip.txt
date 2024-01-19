@@ -1,0 +1,25 @@
+##### METHOD 1 ######
+# Export public IP addresses to a file
+resource "null_resource" "export_ips" {
+  depends_on = [aws_instance.my_servers]   # is executed only after the EC2 instances are created.
+
+  provisioner "local-exec" {   # execute scripts or commands on the local machine or on remote resources.
+    command = <<-EOT
+      echo "${join("\n", aws_instance.my_servers.*.public_ip)}" > host-inventory   # This uses the join function to concatenate the public IP addresses with newline (\n) as the separator.
+    EOT
+  }
+}
+
+############################################################################################
+
+##### METHOD 2 ######
+# Output the public IP addresses of the instances to a file
+output "instance_ips" {
+  value = aws_instance.my_servers.*.public_ip
+}
+
+# Write the output to a file called host-inventory
+resource "local_file" "host_inventory" {
+  content  = join("\n", aws_instance.my_servers.*.public_ip)
+  filename = "host-inventory"
+}
